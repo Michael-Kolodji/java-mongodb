@@ -19,7 +19,6 @@ public class RecipeServiceImpl implements RecipeService {
 	public Recipe save(Recipe recipe) {
 		return recipeRepository.save(recipe);
 	}
-	
 
 	@Override
 	public void update(String id, Recipe recipe) {
@@ -35,25 +34,21 @@ public class RecipeServiceImpl implements RecipeService {
 
 		recipeRepository.save(recipeBase);
 	}
-	
 
 	@Override
 	public void delete(String id) {
 		recipeRepository.deleteById(id);
 	}
-	
 
 	@Override
 	public Recipe get(String id) {
 		return recipeRepository.findRecipeById(id);
 	}
-	
 
 	@Override
 	public List<Recipe> listByIngredient(String ingredient) {
 		return recipeRepository.findRecipeByIngredientsOrderByTitle(ingredient);
 	}
-	
 
 	@Override
 	public List<Recipe> search(String search) {
@@ -68,12 +63,11 @@ public class RecipeServiceImpl implements RecipeService {
 			return;
 		}
 
-		Integer sum = new Integer(recipeBase.getLikes().get(0)) + 1;
-		recipeBase.getLikes().set(0, sum.toString());
+		recipeBase.getLikes().set(0, String.valueOf(Integer.parseInt(recipeBase.getLikes().get(0)) + 1));
 		recipeBase.getLikes().set(1, userId);
+
 		recipeRepository.save(recipeBase);
 	}
-	
 
 	@Override
 	public void unlike(String id, String userId) {
@@ -83,16 +77,9 @@ public class RecipeServiceImpl implements RecipeService {
 			return;
 		}
 
-		for (int i = 0; i < recipeBase.getLikes().size(); i++) {
-			if(i == 0) {
-				Integer t = new Integer(recipeBase.getLikes().get(i)) - 1;
-				recipeBase.getLikes().set(i, t.toString());
-			} else {
-				recipeBase.getLikes().set(1, userId);
-			}
-			
-		}
-		
+		recipeBase.getLikes().set(0, String.valueOf(Integer.parseInt(recipeBase.getLikes().get(0)) - 1));
+		recipeBase.getLikes().set(1, userId);
+
 		recipeRepository.save(recipeBase);
 	}
 

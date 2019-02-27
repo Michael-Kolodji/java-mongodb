@@ -3,10 +3,6 @@ package challenge;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/**
- * Classe para mapear o comentário da receita no MongoDB
- *
- */
 @Document(collection = "recipeComment")
 public class RecipeComment {
 
@@ -35,6 +31,11 @@ public class RecipeComment {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	@Override
+	public String toString() {
+		return "RecipeComment [id=" + id + ", comment=" + comment + "]";
 	}
 
 }
