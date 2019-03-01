@@ -63,8 +63,7 @@ public class RecipeServiceImpl implements RecipeService {
 			return;
 		}
 
-		recipeBase.getLikes().set(0, String.valueOf(Integer.parseInt(recipeBase.getLikes().get(0)) + 1));
-		recipeBase.getLikes().set(1, userId);
+		recipeBase.getLikes().add(userId);
 
 		recipeRepository.save(recipeBase);
 	}
@@ -77,8 +76,7 @@ public class RecipeServiceImpl implements RecipeService {
 			return;
 		}
 
-		recipeBase.getLikes().set(0, String.valueOf(Integer.parseInt(recipeBase.getLikes().get(0)) - 1));
-		recipeBase.getLikes().set(1, userId);
+		recipeBase.getLikes().remove(userId);
 
 		recipeRepository.save(recipeBase);
 	}
